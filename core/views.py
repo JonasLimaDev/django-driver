@@ -5,8 +5,8 @@ import os
 from .services import *
 from . models import Arquivos
 # Create your views here.
-def home(request):
 
+def home(request):
     return render(request,"base.html")
 
 
@@ -17,16 +17,18 @@ def upload_arquivo(request):
         form = FormUpload(request.POST,request.FILES)
         if form.is_valid():
             pasta_temporaria = os.path.join(settings.BASE_DIR, "media/temp/")
-            print(pasta_temporaria)
+            
             arquivo = form.cleaned_data['arquivo']
             autor = form.cleaned_data['autor']
             nome_arquivo = str(form.cleaned_data['arquivo'])
             with open(f'{pasta_temporaria}{nome_arquivo}', 'wb+') as destination:
                 for chunk in arquivo.chunks():
                     destination.write(chunk)
+
             caminho_arquivo = os.path.join(pasta_temporaria, nome_arquivo)
             link = upload_drive(caminho_arquivo)
             Arquivos.objects.create(autor=autor, nome_arquivo=nome_arquivo, link_arquivo=link)
+            #remove o arquivo temporário do disco
             os.remove(caminho_arquivo)
             return redirect('lista')
 

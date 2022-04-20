@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{%block main%}
+<section class="p-1 m-2">
+<table class="table ">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nome do Arquivo</th>
+        <th scope="col">Autor</th>
+        <th scope="col">Data de Upload</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          {%for arquivo in arquivos%}
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{arquivo.nome_arquivo}}</td>
+        <td>{{arquivo.autor}}</td>
+        <td>{{arquivo.data_upload}}</td>
+        <td><a class="link-info"  target="_blank" href="{{arquivo.link_arquivo}}">visualizar</a></td>
+      </tr>
+        {%endfor%}
+      
+    </tbody>
+  </table>
+</section>
+{%endblock main%}

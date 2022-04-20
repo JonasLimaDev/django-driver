@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%block main%}
+<form class="row g-3 p-1 m-2 form-control" enctype="multipart/form-data" method="post">
+    {%csrf_token%}
+  
+    <div class="col-auto">
+      <label for="formFile" class="form-label">Selecione um arquivo pdf</label>
+      {{form.arquivo_config}}
+    </div>
+    
+  <div class="col-12 mb-2 ">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </div>
+  </form>
+  {%endblock main%}
